@@ -1,0 +1,87 @@
+<ForceField>
+ <AtomTypes>
+  <Type name="acnt-CT" class="CTs" element="C" mass="12.011"/>
+  <Type name="acnt-DCT" class="Sh" mass="0.0"/>
+  <Type name="acnt-CZ" class="CZs" element="C" mass="12.011"/>
+  <Type name="acnt-DCZ" class="Sh" mass="0.0"/>
+  <Type name="acnt-NZ" class="NZs" element="N" mass="14.0067"/>
+  <Type name="acnt-DNZ" class="Sh" mass="0.0"/>
+  <Type name="acnt-HZ" class="HZs" element="H" mass="1.0080"/>
+  <Type name="acnt-HZ1" class="HZs" element="H" mass="1.0080"/>
+  <Type name="acnt-HZ2" class="HZs" element="H" mass="1.0080"/>
+  <!-- end acetonitrile   -->
+ </AtomTypes>
+ <Residues>
+  <Residue name="acnt">
+   <Atom name="CT" type="acnt-CT"/>
+   <Atom name="CZ" type="acnt-CZ"/>
+   <Atom name="NZ" type="acnt-NZ"/>
+   <Atom name="HZ" type="acnt-HZ"/>
+   <Atom name="HZ1" type="acnt-HZ1"/>
+   <Atom name="HZ2" type="acnt-HZ2"/>
+   <Atom name="DCT" type="acnt-DCT"/>
+   <Atom name="DCZ" type="acnt-DCZ"/>
+   <Atom name="DNZ" type="acnt-DNZ"/>
+   <Bond from="0" to="1"/>
+   <Bond from="1" to="2"/>
+   <Bond from="0" to="3"/>
+   <Bond from="0" to="4"/>
+   <Bond from="0" to="5"/>
+  </Residue>
+ </Residues>
+ <HarmonicBondForce>
+  <Bond class1="CTs" class2="CZs" length="0.14700" k="326352.0"/>
+  <Bond class1="CZs" class2="NZs" length="0.11570" k="543920.0"/>
+  <Bond class1="CTs" class2="HZs" length="0.1087" k="284512.0"/>
+ </HarmonicBondForce>
+ <HarmonicAngleForce>
+  <Angle class1="HZs" class2="CTs" class3="CZs" angle="1.89368223841385" k="292.880"/>
+  <Angle class1="HZs" class2="CTs" class3="HZs" angle="1.91462618943778" k="276.144"/>
+  <Angle class1="CTs" class2="CZs" class3="NZs" angle="3.14159265358979" k="1255.200"/>
+ </HarmonicAngleForce>
+ <NonbondedForce coulomb14scale="0" lj14scale="0">
+  <Atom type="acnt-CT" charge="1.263" sigma="1.00000" epsilon="0.00000"/>
+  <Atom type="acnt-DCT" charge="-1.252" sigma="1.00000" epsilon="0.00000"/>
+  <Atom type="acnt-CZ" charge="1.004" sigma="1.00000" epsilon="0.00000"/>
+  <Atom type="acnt-DCZ" charge="-0.716" sigma="1.00000" epsilon="0.00000"/>
+  <Atom type="acnt-NZ" charge="0.554" sigma="1.00000" epsilon="0.00000"/>
+  <Atom type="acnt-DNZ" charge="-1.015" sigma="1.00000" epsilon="0.00000"/>
+  <Atom type="acnt-HZ" charge="0.054" sigma="1.00000" epsilon="0.00000"/>
+  <Atom type="acnt-HZ1" charge="0.054" sigma="1.00000" epsilon="0.00000"/>
+  <Atom type="acnt-HZ2" charge="0.054" sigma="1.00000" epsilon="0.00000"/>
+ </NonbondedForce>
+ <DrudeForce>
+  <Particle type1="acnt-DCZ" type2="acnt-CZ" charge="-0.716" polarizability="0.000760" thole="1"/>
+  <Particle type1="acnt-DCT" type2="acnt-CT" charge="-1.252" polarizability="0.002324" thole="1"/>
+  <Particle type1="acnt-DNZ" type2="acnt-NZ" charge="-1.015" polarizability="0.001527" thole="1"/>
+ </DrudeForce>
+ <CustomNonbondedForce energy="A*exBr - f6*C6/(r^6) - f8*C8/(r^8) - f10*C10/(r^10) - f12*C12/(r^12);
+    A=Aex-Ael-Ain-Adh;
+    Aex=sqrt(Aexch1*Aexch2); Ael=sqrt(Aelec1*Aelec2); Ain=sqrt(Aind1*Aind2); Adh=sqrt(Adhf1*Adhf2);
+    f12 = f10 - exBr*( (1/39916800)*(Br^11)*(1 + Br/12) );
+    f10 = f8 - exBr*( (1/362880)*(Br^9)*(1 + Br/10 ) );
+    f8 = f6 - exBr*( (1/5040)*(Br^7)*(1 + Br/8 ) );
+    f6 = 1 - exBr*(1 + Br * (1 + (1/2)*Br*(1 + (1/3)*Br*(1 + (1/4)*Br*(1 + (1/5)*Br*(1 + (1/6)*Br ) ) )  ) ) );
+    exBr = exp(-Br);
+    Br = B*r;
+    B=(Bexp1+Bexp2)*Bexp1*Bexp2/(Bexp1^2 + Bexp2^2);
+    C6=sqrt(C61*C62); C8=sqrt(C81*C82); C10=sqrt(C101*C102); C12=sqrt(C121*C122)"
+    bondCutoff="3">
+  <PerParticleParameter name="Aexch"/>
+  <PerParticleParameter name="Aelec"/>
+  <PerParticleParameter name="Aind"/>
+  <PerParticleParameter name="Adhf"/>
+  <PerParticleParameter name="Bexp"/>
+  <PerParticleParameter name="C6"/>
+  <PerParticleParameter name="C8"/>
+  <PerParticleParameter name="C10"/>
+  <PerParticleParameter name="C12"/>
+  <!-- the dispersion parameters for acetonitrile are scaled down by ~2.5 % to implicitly account for 3-body dispersion    -->
+  <Atom class="CTs" Aexch="304938.7" Aelec="117598.0" Aind="11.7" Adhf="2837.1" Bexp="34.384" C6="0.0013208" C8="5.563e-05" C10="1.764e-06" C12="5.08036e-08"/>
+  <Atom class="CZs" Aexch="159315.3" Aelec="58811.2" Aind="7955.3" Adhf="4305.8" Bexp="34.384" C6="0.0009836" C8="4.5752e-05" C10="3.08927e-06" C12="1.39371e-07"/>
+  <Atom class="NZs" Aexch="491703.6" Aelec="172626.6" Aind="4148.3" Adhf="28670.5" Bexp="35.904" C6="0.0015419" C8="9.589e-05" C10="1.035016e-05" C12="0"/>
+  <Atom class="HZs" Aexch="10685.8" Aelec="1260.2" Aind="1023.9" Adhf="1312.8" Bexp="37.794" C6="0.0001262" C8="6.627e-06" C10="4.8711e-07" C12="0"/>
+  <Atom class="Sh" Aexch="0" Aelec="0" Aind="0" Adhf="0" Bexp="100" C6="0" C8="0" C10="0" C12="0"/>
+  <!-- end acetonitrile    -->
+ </CustomNonbondedForce>
+</ForceField>
